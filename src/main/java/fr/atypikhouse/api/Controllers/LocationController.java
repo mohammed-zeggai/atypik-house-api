@@ -1,7 +1,6 @@
 package fr.atypikhouse.api.Controllers;
 
 import fr.atypikhouse.api.Entities.Location;
-import fr.atypikhouse.api.Entities.User;
 import fr.atypikhouse.api.Repositories.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
