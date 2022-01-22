@@ -13,9 +13,11 @@ public class Commentaire {
     private Integer id;
 
     @ManyToOne
+    @NotNull
     private User user;
 
     @ManyToOne
+    @NotNull
     private Location location;
 
     @NotNull

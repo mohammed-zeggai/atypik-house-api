@@ -28,12 +28,29 @@ public class EquipementController {
         return new ResponseEntity<Equipement>(equipement, HttpStatus.OK);
     }
 
+    // CREATE
     @PostMapping("/create")
     public ResponseEntity<Equipement> create(@RequestBody Equipement equipement) {
         equipementRepository.save(equipement);
         return new ResponseEntity<Equipement>(equipement, HttpStatus.CREATED);
     }
 
+    // UPDATE
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Equipement> update(@PathVariable("id") Integer id, @RequestBody Equipement newEquipement) {
+        // Get the old equipement
+        Equipement equipement = equipementRepository.findById(id).get();
+
+        // Update the equipement with newEquipement values
+        equipement.setTitre(newEquipement.getTitre());
+        equipement.setDescription(newEquipement.getDescription());
+
+        // Save the equipement
+        equipementRepository.save(equipement);
+        return new ResponseEntity<Equipement>(equipement, HttpStatus.OK);
+    }
+
+    // DELETE
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Equipement> delete(@PathVariable("id") Integer id) {
         Equipement equipement = equipementRepository.findById(id).get();

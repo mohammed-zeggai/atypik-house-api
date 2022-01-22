@@ -28,12 +28,29 @@ public class NotificationController {
         return new ResponseEntity<Notification>(notification, HttpStatus.OK);
     }
 
+    // CREATE
     @PostMapping("/create")
     public ResponseEntity<Notification> create(@RequestBody Notification notification) {
         notificationRepository.save(notification);
         return new ResponseEntity<Notification>(notification, HttpStatus.CREATED);
     }
 
+    // UPDATE
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Notification> update(@PathVariable("id") Integer id, @RequestBody Notification newNotification) {
+        // Get the old notification
+        Notification notification = notificationRepository.findById(id).get();
+
+        // Update the notification with newNotification values
+        notification.setDate(newNotification.getDate());
+        notification.setMessage(newNotification.getMessage());
+
+        // Save the notification
+        notificationRepository.save(notification);
+        return new ResponseEntity<Notification>(notification, HttpStatus.OK);
+    }
+
+    // DELETE
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Notification> delete(@PathVariable("id") Integer id) {
         Notification notification = notificationRepository.findById(id).get();

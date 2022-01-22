@@ -1,7 +1,7 @@
 package fr.atypikhouse.api.Repositories;
 
 import fr.atypikhouse.api.Entities.Commentaire;
-import org.hibernate.metamodel.model.convert.spi.JpaAttributeConverter;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CommentaireRepository extends JpaAttributeConverter<Commentaire, Integer> {
+public interface CommentaireRepository extends JpaRepository<Commentaire, Integer> {
 }

@@ -28,12 +28,35 @@ public class LocationController {
         return new ResponseEntity<Location>(location, HttpStatus.OK);
     }
 
+    // CREATE
     @PostMapping("/create")
     public ResponseEntity<Location> create(@RequestBody Location location) {
         locationRepository.save(location);
         return new ResponseEntity<Location>(location, HttpStatus.CREATED);
     }
 
+    // UPDATE
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Location> update(@PathVariable("id") Integer id, @RequestBody Location newLocation) {
+        // Get the old location
+        Location location = locationRepository.findById(id).get();
+
+        // Update the location with newLocation values
+        location.setTitre(newLocation.getTitre());
+        location.setType(newLocation.getType());
+        location.setSurface(newLocation.getSurface());
+        location.setDescription(newLocation.getDescription());
+        location.setAdresse(newLocation.getAdresse());
+        location.setPlanning(newLocation.getPlanning());
+        location.setImage(newLocation.getImage());
+        location.setPrix(newLocation.getPrix());
+
+        // Save the location
+        locationRepository.save(location);
+        return new ResponseEntity<Location>(location, HttpStatus.OK);
+    }
+
+    // DELETE
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Location> delete(@PathVariable("id") Integer id) {
         Location location = locationRepository.findById(id).get();

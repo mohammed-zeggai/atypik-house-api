@@ -28,12 +28,36 @@ public class UserController {
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
+    // CREATE
     @PostMapping("/create")
     public ResponseEntity<User> create(@RequestBody User user) {
         userRepository.save(user);
         return new ResponseEntity<User>(user, HttpStatus.CREATED);
     }
 
+    // UPDATE
+    @PutMapping("/update/{id}")
+    public ResponseEntity<User> update(@PathVariable("id") Integer id, @RequestBody User newUser) {
+        // Get the old user
+        User user = userRepository.findById(id).get();
+
+        // Update the user with newUser values
+        user.setNom(newUser.getNom());
+        user.setPrenom(newUser.getPrenom());
+        user.setEmail(newUser.getEmail());
+        user.setPassword(newUser.getPassword());
+        user.setAdresse(newUser.getAdresse());
+        user.setDateNaissance(newUser.getDateNaissance());
+        user.setImage(newUser.getImage());
+        user.setTelephone(newUser.getTelephone());
+        user.setRole(newUser.getRole());
+
+        // Save the user
+        userRepository.save(user);
+        return new ResponseEntity<User>(user, HttpStatus.OK);
+    }
+
+    // DELETE
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<User> delete(@PathVariable("id") Integer id) {
         User user = userRepository.findById(id).get();

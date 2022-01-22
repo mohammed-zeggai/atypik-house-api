@@ -1,5 +1,6 @@
 package fr.atypikhouse.api.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class Equipement {
 
     public void setId(Integer id) { this.id = id; }
 
+    @JsonIgnore
     public Location getLocation() { return location; }
 
     public void setLocation(Location location) { this.location = location; }

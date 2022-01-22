@@ -28,12 +28,28 @@ public class ReservationController {
         return new ResponseEntity<Reservation>(reservation, HttpStatus.OK);
     }
 
+    // CREATE
     @PostMapping("/create")
     public ResponseEntity<Reservation> create(@RequestBody Reservation reservation) {
         reservationRepository.save(reservation);
         return new ResponseEntity<Reservation>(reservation, HttpStatus.CREATED);
     }
 
+    // UPDATE
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Reservation> update(@PathVariable("id") Integer id, @RequestBody Reservation newReservation) {
+        // Get the old reservation
+        Reservation reservation = reservationRepository.findById(id).get();
+
+        // Update the reservation with newReservation values
+        reservation.setDate(newReservation.getDate());
+
+        // Save the reservation
+        reservationRepository.save(reservation);
+        return new ResponseEntity<Reservation>(reservation, HttpStatus.OK);
+    }
+
+    // DELETE
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Reservation> delete(@PathVariable("id") Integer id) {
         Reservation reservation = reservationRepository.findById(id).get();

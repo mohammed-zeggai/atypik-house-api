@@ -3,6 +3,7 @@ package fr.atypikhouse.api.Entities;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Location {
@@ -11,11 +12,17 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "location", orphanRemoval = true)
+    private List<Equipement> equipements;
+
     @ManyToOne
     private User user;
 
     @NotNull
     private String titre;
+
+    @NotNull
+    private String type;
 
     @NotNull
     private String description;
@@ -60,6 +67,14 @@ public class Location {
 
     public void setTitre(String titre) {
         this.titre = titre;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getDescription() {
@@ -116,6 +131,7 @@ public class Location {
                 "id=" + id +
                 ", user=" + user +
                 ", titre='" + titre + '\'' +
+                ", type='" + type + '\'' +
                 ", description='" + description + '\'' +
                 ", surface='" + surface + '\'' +
                 ", image='" + image + '\'' +
