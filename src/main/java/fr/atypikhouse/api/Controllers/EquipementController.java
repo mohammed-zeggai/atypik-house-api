@@ -22,7 +22,7 @@ public class EquipementController {
         return new ResponseEntity<List<Equipement>>(equipements, HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Equipement> getOne(@PathVariable("id") Integer id) {
         Equipement equipement = equipementRepository.findById(id).get();
         return new ResponseEntity<Equipement>(equipement, HttpStatus.OK);

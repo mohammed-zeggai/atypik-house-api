@@ -22,7 +22,7 @@ public class CommentaireController {
         return new ResponseEntity<List<Commentaire>>(commentaires, HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Commentaire> getOne(@PathVariable("id") Integer id) {
         Commentaire commentaire = commentaireRepository.findById(id).get();
         return new ResponseEntity<Commentaire>(commentaire, HttpStatus.OK);

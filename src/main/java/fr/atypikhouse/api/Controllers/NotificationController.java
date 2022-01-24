@@ -22,7 +22,7 @@ public class NotificationController {
         return new ResponseEntity<List<Notification>>(notifications, HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Notification> getOne(@PathVariable("id") Integer id) {
         Notification notification = notificationRepository.findById(id).get();
         return new ResponseEntity<Notification>(notification, HttpStatus.OK);

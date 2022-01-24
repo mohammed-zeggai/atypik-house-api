@@ -22,7 +22,7 @@ public class ReservationController {
         return new ResponseEntity<List<Reservation>>(reservations, HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Reservation> getOne(@PathVariable("id") Integer id) {
         Reservation reservation = reservationRepository.findById(id).get();
         return new ResponseEntity<Reservation>(reservation, HttpStatus.OK);

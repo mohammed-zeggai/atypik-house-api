@@ -1,5 +1,6 @@
 package fr.atypikhouse.api.Entities;
 
+
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;

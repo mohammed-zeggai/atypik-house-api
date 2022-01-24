@@ -22,7 +22,7 @@ public class LocationController {
         return new ResponseEntity<List<Location>>(locations, HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Location> getOne(@PathVariable("id") Integer id) {
         Location location = locationRepository.findById(id).get();
         return new ResponseEntity<Location>(location, HttpStatus.OK);
