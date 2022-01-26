@@ -1,6 +1,8 @@
 package fr.atypikhouse.api.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,7 +20,6 @@ public class Reservation {
     @ManyToOne
     private Location location;
 
-    @NotNull
     private Date date;
 
     public Reservation() {

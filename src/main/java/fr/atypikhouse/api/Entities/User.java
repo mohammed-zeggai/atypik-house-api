@@ -75,7 +75,6 @@ public class User {
         this.reservations = reservations;
     }
 
-    @JsonIgnore
     public List<Notification> getNotifications() {
         return notifications;
     }

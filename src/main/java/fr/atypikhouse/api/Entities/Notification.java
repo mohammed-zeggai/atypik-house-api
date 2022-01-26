@@ -1,5 +1,6 @@
 package fr.atypikhouse.api.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class Notification {
 
     public void setId(Integer id) { this.id = id; }
 
+    @JsonIgnore
     public User getUser() { return user; }
 
     public void setUser(User user) { this.user = user; }
