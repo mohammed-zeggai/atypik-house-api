@@ -39,6 +39,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             // Autoriser des urls
             .antMatchers(HttpMethod.POST, "/api/user/create").permitAll()
             .antMatchers(HttpMethod.GET, "/api/location").permitAll()
+            .antMatchers(HttpMethod.GET, "/api/location/newest").permitAll()
             .antMatchers(HttpMethod.GET, "/api/location/{id}").permitAll()
             .antMatchers(HttpMethod.GET, "/api/equipement").permitAll()
             .antMatchers(HttpMethod.GET, "/api/commentaire").permitAll()

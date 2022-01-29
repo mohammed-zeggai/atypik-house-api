@@ -25,6 +25,12 @@ public class LocationController {
         return new ResponseEntity<List<Location>>(locations, HttpStatus.OK);
     }
 
+    @GetMapping("/newest")
+    public ResponseEntity<List<Location>> getNewest() {
+        List<Location> locations = locationRepository.findTop6ByOrderByIdDesc();
+        return new ResponseEntity<List<Location>>(locations, HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Location> getOne(@PathVariable("id") Integer id) {
         Location location = locationRepository.findById(id).get();

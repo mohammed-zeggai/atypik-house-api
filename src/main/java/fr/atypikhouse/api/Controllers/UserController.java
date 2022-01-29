@@ -33,13 +33,19 @@ public class UserController{
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
+    @GetMapping("/byEmail/{email}")
+    public ResponseEntity<User> getOneByEmail(@PathVariable("email") String email) {
+        User user = userRepository.findByEmail(email);
+        return new ResponseEntity<User>(user, HttpStatus.OK);
+    }
+
     // CREATE
     @PostMapping("/create")
     public ResponseEntity<User> create(@RequestBody User user) throws UserAlreadyExistsException {
         User existingUser = userRepository.findByEmail(user.getEmail());
 
         if (existingUser != null) {
-            throw new UserAlreadyExistsException("This email has already been used!");
+            throw new UserAlreadyExistsException("Cet adresse mail est déjà utilisée!");
         }
 
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
