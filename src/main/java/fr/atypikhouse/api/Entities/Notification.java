@@ -16,10 +16,7 @@ public class Notification {
     @ManyToOne
     private User user;
 
-    @NotNull
     private String message;
-
-    @NotNull
     private Date date;
 
     public Notification() {

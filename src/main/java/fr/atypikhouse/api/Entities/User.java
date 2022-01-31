@@ -25,25 +25,15 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
     private List<Notification> notifications;
-
-    @NotNull
+    
     private String nom;
-
-    @NotNull
     private String prenom;
-
-    @NotNull
     private String email;
-
-    @NotNull
     private String password;
-
     private String image;
     private Date dateNaissance;
     private String telephone;
     private String adresse;
-
-    @NotNull
     private String role;
 
     public User() {

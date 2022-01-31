@@ -15,10 +15,7 @@ public class Equipement {
     @ManyToOne
     private Location location;
 
-    @NotNull
     private String titre;
-
-    @NotNull
     private String description;
 
     public Equipement() {

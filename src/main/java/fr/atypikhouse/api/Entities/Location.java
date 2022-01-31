@@ -1,6 +1,6 @@
 package fr.atypikhouse.api.Entities;
 
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,34 +15,39 @@ public class Location {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "location", orphanRemoval = true)
     private List<Equipement> equipements;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "location", orphanRemoval = true)
+    private List<Commentaire> commentaires;
+
     @ManyToOne
     private User user;
 
-    @NotNull
     private String titre;
-
-    @NotNull
     private String type;
-
-    @NotNull
     private String description;
-
-    @NotNull
     private String surface;
-
-    @NotNull
     private String image;
-
-    @NotNull
     private String planning;
-
-    @NotNull
     private Double prix;
-
-    @NotNull
     private String adresse;
 
     public Location() {
+    }
+
+    public List<Equipement> getEquipements() {
+        return equipements;
+    }
+
+    public void setEquipements(List<Equipement> equipements) {
+        this.equipements = equipements;
+    }
+
+    @JsonIgnore
+    public List<Commentaire> getCommentaires() {
+        return commentaires;
+    }
+
+    public void setCommentaires(List<Commentaire> commentaires) {
+        this.commentaires = commentaires;
     }
 
     public Integer getId() {

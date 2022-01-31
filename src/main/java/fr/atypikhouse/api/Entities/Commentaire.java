@@ -1,7 +1,6 @@
 package fr.atypikhouse.api.Entities;
 
-
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,21 +13,14 @@ public class Commentaire {
     private Integer id;
 
     @ManyToOne
-    @NotNull
     private User user;
 
     @ManyToOne
-    @NotNull
     private Location location;
 
-    @NotNull
     private String commentaire;
-
-    @NotNull
     private Date date_ajout;
-
-    @NotNull
-    private  Date date_modification;
+    private Date date_modification;
 
     public Commentaire() {
     }

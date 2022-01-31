@@ -30,13 +30,34 @@ public class UserController{
     @GetMapping("/{id}")
     public ResponseEntity<User> getOne(@PathVariable("id") Integer id) {
         User user = userRepository.findById(id).get();
+
+        // Remove password from returned entity
+        user.setPassword("");
+
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
     @GetMapping("/byEmail/{email}")
     public ResponseEntity<User> getOneByEmail(@PathVariable("email") String email) {
         User user = userRepository.findByEmail(email);
+
+        // Remove password from returned entity
+        user.setPassword("");
+
         return new ResponseEntity<User>(user, HttpStatus.OK);
+    }
+
+    @GetMapping("/testCredentials/{email}/{password}")
+    public ResponseEntity<String> testCredentials(@PathVariable("email") String email,
+                                                  @PathVariable("password") String password) {
+
+        User user = userRepository.findByEmail(email);
+
+        if (!bCryptPasswordEncoder.matches(password, user.getPassword())) {
+            return new ResponseEntity<String>("KO", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<String>("OK", HttpStatus.OK);
     }
 
     // CREATE
@@ -51,6 +72,10 @@ public class UserController{
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         userRepository.save(user);
+
+        // Remove password from returned entity
+        user.setPassword("");
+
         return new ResponseEntity<User>(user, HttpStatus.CREATED);
     }
 
@@ -73,6 +98,10 @@ public class UserController{
 
         // Save the user
         userRepository.save(user);
+
+        // Remove password from returned entity
+        user.setPassword("");
+
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
@@ -81,6 +110,9 @@ public class UserController{
     public ResponseEntity<User> delete(@PathVariable("id") Integer id) {
         User user = userRepository.findById(id).get();
         userRepository.delete(user);
+
+        // Remove password from returned entity
+        user.setPassword("");
 
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
