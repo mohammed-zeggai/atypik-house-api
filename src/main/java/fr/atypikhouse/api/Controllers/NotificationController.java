@@ -27,4 +27,10 @@ public class NotificationController {
 
         return new ResponseEntity<List<Notification>>(user.getNotifications(), HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteOneById(@PathVariable("id") Integer id) {
+        notificationRepository.deleteById(id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }
