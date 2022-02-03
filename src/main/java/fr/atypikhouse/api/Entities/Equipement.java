@@ -1,7 +1,6 @@
 package fr.atypikhouse.api.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 
@@ -9,7 +8,7 @@ import javax.persistence.*;
 public class Equipement {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne

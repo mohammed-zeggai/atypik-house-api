@@ -1,7 +1,6 @@
 package fr.atypikhouse.api.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,7 +9,7 @@ import java.util.Date;
 public class Notification {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne

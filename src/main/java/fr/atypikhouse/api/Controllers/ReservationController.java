@@ -3,9 +3,11 @@ package fr.atypikhouse.api.Controllers;
 import fr.atypikhouse.api.Entities.Location;
 import fr.atypikhouse.api.Entities.Notification;
 import fr.atypikhouse.api.Entities.Reservation;
+import fr.atypikhouse.api.Entities.User;
 import fr.atypikhouse.api.Repositories.LocationRepository;
 import fr.atypikhouse.api.Repositories.NotificationRepository;
 import fr.atypikhouse.api.Repositories.ReservationRepository;
+import fr.atypikhouse.api.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,9 @@ public class ReservationController {
     @Autowired
     private NotificationRepository notificationRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping
     public ResponseEntity<List<Reservation>> getAll() {
         List<Reservation> reservations = reservationRepository.findAll();
@@ -34,10 +39,17 @@ public class ReservationController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Reservation> getOne(@PathVariable("id") Integer id) {
-        Reservation reservation = reservationRepository.findById(id).get();
-        return new ResponseEntity<Reservation>(reservation, HttpStatus.OK);
+    public ResponseEntity<List<Reservation>> getAllForUser(@PathVariable("id") Integer id) {
+        User user = userRepository.findById(id).get();
+
+        return new ResponseEntity<List<Reservation>>(user.getReservations(), HttpStatus.OK);
     }
+
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Reservation> getOne(@PathVariable("id") Integer id) {
+//        Reservation reservation = reservationRepository.findById(id).get();
+//        return new ResponseEntity<Reservation>(reservation, HttpStatus.OK);
+//    }
 
     // CREATE
     @PostMapping("/create")

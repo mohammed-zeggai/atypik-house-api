@@ -24,6 +24,10 @@ public class UserController{
     @GetMapping
     public ResponseEntity<List<User>> getAll() {
         List<User> users = userRepository.findAll();
+
+        // Remove passwords from returned entities
+        users.stream().forEach(user -> user.setPassword(""));
+
         return new ResponseEntity<List<User>>(users, HttpStatus.OK);
     }
 
@@ -77,6 +81,20 @@ public class UserController{
         user.setPassword("");
 
         return new ResponseEntity<User>(user, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/updateRole/{id}/{newRole}")
+    public ResponseEntity<User> update(@PathVariable("id") Integer id, @PathVariable("newRole") String newRole) {
+        // Get the user
+        User user = userRepository.findById(id).get();
+
+        // Change the role
+        user.setRole(newRole);
+
+        // Save the user
+        userRepository.save(user);
+
+        return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
     // UPDATE
