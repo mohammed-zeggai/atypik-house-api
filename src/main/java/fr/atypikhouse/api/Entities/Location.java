@@ -13,9 +13,6 @@ public class Location {
     private Integer id;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "location", orphanRemoval = true)
-    private List<Equipement> equipements;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "location", orphanRemoval = true)
     private List<Commentaire> commentaires;
 
     @ManyToOne
@@ -24,6 +21,7 @@ public class Location {
     private String titre;
     private String type;
     private String description;
+    private String equipements;
     private String surface;
     private String image;
     private String planning;
@@ -31,14 +29,6 @@ public class Location {
     private String adresse;
 
     public Location() {
-    }
-
-    public List<Equipement> getEquipements() {
-        return equipements;
-    }
-
-    public void setEquipements(List<Equipement> equipements) {
-        this.equipements = equipements;
     }
 
     @JsonIgnore
@@ -88,6 +78,14 @@ public class Location {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getEquipements() {
+        return equipements;
+    }
+
+    public void setEquipements(String equipements) {
+        this.equipements = equipements;
     }
 
     public String getSurface() {
