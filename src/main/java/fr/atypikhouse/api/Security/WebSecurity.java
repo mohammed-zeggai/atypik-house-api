@@ -31,24 +31,24 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         authFilter.setFilterProcessesUrl("/api/user/login");
 
         http.addFilterBefore(new CORSFilter(), ChannelProcessingFilter.class)
-            .cors()
-            .and()
-            .csrf()
-            .disable()
-            .authorizeRequests()
-            // Autoriser des urls
-            .antMatchers(HttpMethod.POST, "/api/user/create").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/location").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/location/newest").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/location/{id}").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/commentaire/location/{id}").permitAll()
-            // Autoriser le reste des URL juste pour les utilisateurs authentifieq
-            .anyRequest().authenticated()
-            .and()
-            .addFilter(authFilter)
-            .addFilter(new JWTAuthorizationFilter(authenticationManager()))
-            // Désactiver les sessions
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .cors()
+                .and()
+                .csrf()
+                .disable()
+                .authorizeRequests()
+                // Autoriser des urls
+                .antMatchers(HttpMethod.POST, "/api/user/create").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/location").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/location/newest").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/location/{id}").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/commentaire/location/{id}").permitAll()
+                // Autoriser le reste des URL juste pour les utilisateurs authentifieq
+                .anyRequest().authenticated()
+                .and()
+                .addFilter(authFilter)
+                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                // Désactiver les sessions
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
     @Override
