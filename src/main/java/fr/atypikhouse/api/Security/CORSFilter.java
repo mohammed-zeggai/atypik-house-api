@@ -13,8 +13,7 @@ public class CORSFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain) throws ServletException, IOException {
-        res.addHeader("Access-Control-Allow-Origin", "http://localhost:8081");
-        res.addHeader("Access-Control-Allow-Origin", "http://159.223.2.119");
+        res.addHeader("Access-Control-Allow-Origin", "*");
 
         if (req.getHeader("Access-Control-Request-Method") != null && "OPTIONS".equals(req.getMethod())) {
             // CORS "pre-flight" request

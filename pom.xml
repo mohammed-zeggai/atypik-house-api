@@ -73,6 +73,7 @@
 		</dependency>
 	</dependencies>
 
+	<!-- Package as an executable jar -->
 	<build>
 		<plugins>
 			<plugin>
