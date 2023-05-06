@@ -8,6 +8,7 @@ import fr.atypikhouse.api.Repositories.LocationRepository;
 import fr.atypikhouse.api.Repositories.NotificationRepository;
 import fr.atypikhouse.api.Repositories.ReservationRepository;
 import fr.atypikhouse.api.Repositories.UserRepository;
+import fr.atypikhouse.api.Utils.DisponibiliteReservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,6 +59,7 @@ public class ReservationController {
         reservationRepository.save(reservation);
 
         Location location = locationRepository.findById(reservation.getLocation().getId()).get();
+        location.setDisponibilite(DisponibiliteReservation.RESERVE.getStatus());
 
         // Notifier
         Notification notification = new Notification();
@@ -88,6 +90,9 @@ public class ReservationController {
     public ResponseEntity<Reservation> delete(@PathVariable("id") Integer id) {
         Reservation reservation = reservationRepository.findById(id).get();
         reservationRepository.delete(reservation);
+
+        Location location = locationRepository.findById(reservation.getLocation().getId()).get();
+        location.setDisponibilite(DisponibiliteReservation.DISPONIBLE.getStatus());
 
         // Notifier
         Notification notification = new Notification();

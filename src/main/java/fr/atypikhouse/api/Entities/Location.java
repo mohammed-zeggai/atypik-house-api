@@ -3,6 +3,7 @@ package fr.atypikhouse.api.Entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -24,9 +25,13 @@ public class Location {
     private String equipements;
     private String surface;
     private String image;
-    private String planning;
+
+    private Date planningStartDate;
+
+    private Date planningEndDate;
     private Double prix;
     private String adresse;
+    private String disponibilite;
 
     public Location() {
     }
@@ -104,14 +109,6 @@ public class Location {
         this.image = image;
     }
 
-    public String getPlanning() {
-        return planning;
-    }
-
-    public void setPlanning(String planning) {
-        this.planning = planning;
-    }
-
     public Double getPrix() {
         return prix;
     }
@@ -128,19 +125,47 @@ public class Location {
         this.adresse = adresse;
     }
 
+    public String getDisponibilite() {
+        return disponibilite;
+    }
+
+    public void setDisponibilite(String disponibilite) {
+        this.disponibilite = disponibilite;
+    }
+
+    public Date getPlanningStartDate() {
+        return planningStartDate;
+    }
+
+    public void setPlanningStartDate(Date planningStartDate) {
+        this.planningStartDate = planningStartDate;
+    }
+
+    public Date getPlanningEndDate() {
+        return planningEndDate;
+    }
+
+    public void setPlanningEndDate(Date planningEndDate) {
+        this.planningEndDate = planningEndDate;
+    }
+
     @Override
     public String toString() {
         return "Location{" +
                 "id=" + id +
+                ", commentaires=" + commentaires +
                 ", user=" + user +
                 ", titre='" + titre + '\'' +
                 ", type='" + type + '\'' +
                 ", description='" + description + '\'' +
+                ", equipements='" + equipements + '\'' +
                 ", surface='" + surface + '\'' +
                 ", image='" + image + '\'' +
-                ", planning='" + planning + '\'' +
+                ", planningStartDate=" + planningStartDate +
+                ", planningEndDate=" + planningEndDate +
                 ", prix=" + prix +
                 ", adresse='" + adresse + '\'' +
+                ", disponibilite='" + disponibilite + '\'' +
                 '}';
     }
 }

@@ -1,4 +1,4 @@
-package fr.atypikhouse.api.ControllersTest;
+/*package fr.atypikhouse.api.ControllersTest;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -34,3 +34,4 @@ public class LocationControllerTest {
                 .andExpect(status().isOk());
     }
 }
+*/

@@ -5,6 +5,7 @@ import fr.atypikhouse.api.Entities.Notification;
 import fr.atypikhouse.api.Entities.User;
 import fr.atypikhouse.api.Repositories.LocationRepository;
 import fr.atypikhouse.api.Repositories.UserRepository;
+import fr.atypikhouse.api.Utils.DisponibiliteReservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +51,7 @@ public class LocationController {
     // CREATE
     @PostMapping("/create")
     public ResponseEntity<Location> create(@RequestBody Location location) {
+        location.setDisponibilite(DisponibiliteReservation.DISPONIBLE.getStatus());
         locationRepository.save(location);
         return new ResponseEntity<Location>(location, HttpStatus.CREATED);
     }
@@ -67,7 +69,8 @@ public class LocationController {
         location.setSurface(newLocation.getSurface());
         location.setDescription(newLocation.getDescription());
         location.setAdresse(newLocation.getAdresse());
-        location.setPlanning(newLocation.getPlanning());
+        location.setPlanningStartDate(newLocation.getPlanningStartDate());
+        location.setPlanningEndDate(newLocation.getPlanningEndDate());
         location.setImage(newLocation.getImage());
         location.setPrix(newLocation.getPrix());
 
