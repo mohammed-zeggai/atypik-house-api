@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -32,6 +34,15 @@ public class LocationController {
     @GetMapping("/newest")
     public ResponseEntity<List<Location>> getNewest() {
         List<Location> locations = locationRepository.findTop6ByOrderByIdDesc();
+        return new ResponseEntity<List<Location>>(locations, HttpStatus.OK);
+    }
+
+    @GetMapping("/search/{startDate}/{endDate}")
+    public ResponseEntity<List<Location>> getSearchResults(@PathVariable("startDate") String startDate,
+                                                           @PathVariable("endDate") String endDate) {
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
+        List<Location> locations = locationRepository.findAllByStartAndEndDate(start, end);
         return new ResponseEntity<List<Location>>(locations, HttpStatus.OK);
     }
 

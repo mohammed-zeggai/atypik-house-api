@@ -40,6 +40,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/user/create").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/location").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/location/newest").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/location/search/{startDate}/{endDate}").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/location/{id}").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/commentaire/location/{id}").permitAll()
                 // Autoriser le reste des URL juste pour les utilisateurs authentifieq
