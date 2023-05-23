@@ -1,7 +1,6 @@
 package fr.atypikhouse.api.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -37,6 +36,11 @@ public class User {
     private String role;
 
     public User() {
+    }
+
+
+    public static junit.runner.Version builder() {
+        return null;
     }
 
     public Integer getId() {
@@ -98,7 +102,7 @@ public class User {
         this.prenom = prenom;
     }
 
-    public String getEmail() {
+    public static String getEmail() {
         return email;
     }
 
