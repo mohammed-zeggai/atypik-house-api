@@ -72,8 +72,8 @@ public class UserDetailsServiceImplementationTest {
 
         User user1 = User.builder()
                 .id(1)
-                .firstName("Tony")
-                .lastName("Stark")
+                .prenom("Tony")
+                .nom("Stark")
                 .email("tony@gmail.com")
                 .build();
 

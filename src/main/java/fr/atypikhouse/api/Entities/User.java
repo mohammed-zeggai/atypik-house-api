@@ -42,7 +42,7 @@ public class User {
     }
 
 
-    public static junit.runner.Version builder() {
+    public static junit.runner.Version builder(){
         return null;
     }
 
