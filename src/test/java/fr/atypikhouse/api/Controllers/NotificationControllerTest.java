@@ -79,10 +79,10 @@ public class NotificationControllerTest {
     }
 
     MockHttpServletResponse:
-    Status = 200
-    Error message = null
-    Headers = [Content-Type:MediaType.APPLICATION_JSON]
-    Content type = MediaType.APPLICATION_JSON
+    Status = 200;
+    Error message = null;
+    Headers = [Content-Type:MediaType.APPLICATION_JSON];
+    Content type = MediaType.APPLICATION_JSON;
     Body = {"id":6}
 
 

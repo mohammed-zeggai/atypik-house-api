@@ -24,7 +24,7 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
     private List<Notification> notifications;
-    
+
     private String nom;
     private String prenom;
     private String email;
@@ -36,6 +36,9 @@ public class User {
     private String role;
 
     public User() {
+    }
+
+    public User(String mohammed, String mohammed1, List emptyList) {
     }
 
 

@@ -30,7 +30,7 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
             throw new UsernameNotFoundException(email);
         }
 
-        User userDetails = new User(user.getEmail(), user.getPassword(), Collections.EMPTY_LIST);
+        User userDetails = new User(fr.atypikhouse.api.Entities.User.getEmail(), user.getPassword(), Collections.EMPTY_LIST);
         return userDetails;
     }
 

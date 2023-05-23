@@ -86,10 +86,10 @@ public class UserControllerTest {
     }
 
     MockHttpServletResponse:
-    Status = 200
-    Error message = null
-    Headers = [Content-Type:MediaType.APPLICATION_JSON]
-    Content type = MediaType.APPLICATION_JSON
+    Status : 200;
+    Error message = null;
+    Headers : [Content-Type:MediaType.APPLICATION_JSON];
+    Content type = MediaType.APPLICATION_JSON;
     Body = {"id":2,"email":"david.parker@gmail.com","prenom":"David","nom":"Parker"}
 
 

@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
 import org.mockito.stubbing.Answer;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,19 +13,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willDoNothing;
+import static org.springframework.security.core.userdetails.User.builder;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willDoNothing;
-import static org.springframework.security.core.userdetails.User.builder;
+
 
 
 @SpringBootTest
@@ -57,7 +56,7 @@ public class UserDetailsServiceImplementationTest {
     public void should_return_exception_when_user_is_not_found(){
         //TDD test driven development
         //given
-        Mockito.when(userRepository.findByEmail(User.getEmail()).then((Answer<?> ) new User("mohammed", "mohammed", Collections.EMPTY_LIST));
+        Mockito.when(userRepository.findByEmail(User.getEmail()).then((Answer<?> ) new User("mohammed", "mohammed", Collections.EMPTY_LIST)));
         //when
         //then
         assertThrows(UsernameNotFoundException.class , () -> {
@@ -115,7 +114,7 @@ public class UserDetailsServiceImplementationTest {
         User updatedUser = userDetailsServiceImplementation.updatedUser(user);
 
         // then - verify the output
-        assertThat(updatedUser.getEmail()).isEqualTo("ram@gmail.com");
+        assertThat(User.getEmail()).isEqualTo("ram@gmail.com");
         assertThat(updatedUser.getPrenom()).isEqualTo("Ram");
     }
 
