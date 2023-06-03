@@ -35,17 +35,21 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
     }
 
     public fr.atypikhouse.api.Entities.User saveUser(fr.atypikhouse.api.Entities.User user) {
+        return user;
     }
 
     public List<fr.atypikhouse.api.Entities.User> getAllUsers() {
+        return null;
     }
 
     public void deleteUser(long userId) {
     }
 
     public Map<Object, Object> getUserById(Integer id) {
+        return null;
     }
 
     public fr.atypikhouse.api.Entities.User updatedUser(fr.atypikhouse.api.Entities.User user) {
+        return user;
     }
 }

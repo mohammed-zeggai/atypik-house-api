@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+
 @Entity
 public class User {
 
@@ -27,7 +28,7 @@ public class User {
 
     private String nom;
     private String prenom;
-    private String email;
+    private static String email;
     private String password;
     private String image;
     private Date dateNaissance;
@@ -39,11 +40,6 @@ public class User {
     }
 
     public User(String mohammed, String mohammed1, List emptyList) {
-    }
-
-
-    public static junit.runner.Version builder(){
-        return null;
     }
 
     public Integer getId() {
