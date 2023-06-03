@@ -28,7 +28,7 @@ public class User {
 
     private String nom;
     private String prenom;
-    private static String email;
+    private String email;
     private String password;
     private String image;
     private Date dateNaissance;
@@ -101,7 +101,7 @@ public class User {
         this.prenom = prenom;
     }
 
-    public static String getEmail() {
+    public String getEmail() {
         return email;
     }
 

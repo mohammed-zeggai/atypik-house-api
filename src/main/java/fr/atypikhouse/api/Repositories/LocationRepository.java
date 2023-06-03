@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface LocationRepository extends JpaRepository<Location, Integer> {
+    Location findByTitre(String titre);
+
     List<Location> findTop6ByOrderByIdDesc();
 
     @Query(value = "SELECT * FROM Location l WHERE DATE(planning_start_date) >= ?1 AND DATE(planning_end_date) <= ?2", nativeQuery = true)

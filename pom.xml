@@ -91,10 +91,6 @@
 			<version>1.4.197</version>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
 	</dependencies>
 
 	<!-- Package as an executable jar -->
