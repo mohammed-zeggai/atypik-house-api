@@ -1,198 +1,94 @@
-//package fr.atypikhouse.api.Controllers;
-//
-//import ch.qos.logback.core.status.Status;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import fr.atypikhouse.api.Entities.Reservation;
-//import fr.atypikhouse.api.Exceptions.ReservationNotFoundException;
-//import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Headers;
-//import org.mockito.Mockito;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-//import org.springframework.http.MediaType;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.mock.web.MockHttpServletResponse;
-//import org.springframework.test.web.servlet.MockMvc;
-//import org.springframework.web.bind.annotation.*;
-//
-//
-//import static net.bytebuddy.matcher.ElementMatchers.is;
-//import static org.springframework.http.RequestEntity.put;
-//import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
-//import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
-//import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-//
-//@WebMvcTest(fr.atypikhouse.api.Controllers.ReservationControllerTest.class)
-//public class ReservationControllerTest {
-//
-//    private static final String END_POINT_PATH = "/reservations";
-//
-//    @Autowired
-//    private MockMvc mockMvc;
-//    @Autowired
-//    private ObjectMapper objectMapper;
-//
-//
-//    //----------------------------------------------------------------------------------------------------------------//
-//    // Test Get Reservation
-//    @GetMapping("api/reservations/{id}")
-//    public ResponseEntity<?> get(@PathVariable("id") Integer id) {
-//        try {
-//            Reservation reservation = service.get(id);
-//            return ResponseEntity.ok(entity2Dto(reservation));
-//
-//        } catch (ReservationNotFoundException e) {
-//            e.printStackTrace();
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
-//
-//    // 404
-//    @Test
-//    public void testGetShouldReturn404NotFound() throws Exception {
-//        Integer reservationId = 3;
-//        String requestURI = END_POINT_PATH + "/" + reservationId;
-//
-//        Mockito.when(service.get(reservationId)).thenThrow(ReservationNotFoundException.class);
-//
-//        mockMvc.perform(get(requestURI))
-//                .andExpect(status().isNotFound())
-//                .andDo(print());
-//    }
-//
-//    // 200
-//    @Test
-//    public void testGetShouldReturn200OK() throws Exception {
-//        Integer reservationId = 3;
-//        String requestURI = END_POINT_PATH + "/" + reservationId;
-//
-//        Reservation reservation = new Reservation()
-//                .id(reservationId);
-//
-//        Mockito.when(service.get(reservationId)).thenReturn(reservation);
-//
-//        mockMvc.perform(get(requestURI))
-//                .andExpect(status().isOk())
-//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(jsonPath("$.id", is(reservationId)))
-//                .andDo(print());
-//    }
-//
-//    MockHttpServletResponse:
-//    Status = 200;
-//    Error message = null;
-//    Headers = [Content-Type:MediaType.APPLICATION_JSON];
-//    Content type = MediaType.APPLICATION_JSON;
-//    Body = {"id":3}
-//
-//
-//    //----------------------------------------------------------------------------------------------------------------//
-//    // Test Update Reservation
-//    @PutMapping("api/reservations/update/{id}")
-//    public ResponseEntity<?> update(@PathVariable("id") Integer id,
-//                                    @RequestBody @Valid Reservation reservation) {
-//        try {
-//            reservation.setId(id);
-//            Reservation updateReservation = service.update(reservation);
-//            return ResponseEntity.ok(entity2Dto(updateReservation));
-//        } catch (ReservationNotFoundException e) {
-//            e.printStackTrace();
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
-//
-//    // 404
-//    @Test
-//    public void testUpdateShouldReturn404NotFound() throws Exception {
-//        Integer reservationId = 3;
-//        String requestURI = END_POINT_PATH + "/" + reservationId;
-//
-//        Reservation reservation = new Reservation().id("3")
-//                .id(reservationId);
-//
-//        Mockito.when(service.update(reservation)).thenThrow(ReservationNotFoundException.class);
-//
-//        String requestBody = objectMapper.writeValueAsString(reservation);
-//
-//        mockMvc.perform(put(requestURI).contentType(MediaType.APPLICATION_JSON).content(requestBody))
-//                .andExpect(status().isNotFound())
-//                .andDo(print());
-//    }
-//
-//    // 400
-//    @Test
-//    public void testUpdateShouldReturn400BadRequest() throws Exception {
-//        Integer reservationId = 3;
-//        String requestURI = END_POINT_PATH + "/" + reservationId;
-//
-//        Reservation reservation = new Reservation().id("3")
-//                .id(reservationId);
-//
-//        String requestBody = objectMapper.writeValueAsString(reservation);
-//
-//        mockMvc.perform(put(requestURI).contentType(MediaType.APPLICATION_JSON).content(requestBody))
-//                .andExpect(status().isBadRequest())
-//                .andDo(print());
-//    }
-//
-//    // 200
-//    @Test
-//    public void testUpdateShouldReturn200OK() throws Exception {
-//        Integer reservationId = 3;
-//        String requestURI = END_POINT_PATH + "/" + reservationId;
-//
-//        Reservation reservation = new Reservation().id("3")
-//                .id(reservationId);
-//
-//        Mockito.when(service.update(reservation)).thenReturn(reservation);
-//
-//        String requestBody = objectMapper.writeValueAsString(reservation);
-//
-//        mockMvc.perform(put(requestURI).contentType(MediaType.APPLICATION_JSON).content(requestBody))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.id", is(reservationId)))
-//                .andDo(print());
-//    }
-//
-//
-//    //----------------------------------------------------------------------------------------------------------------//
-//    // Test Delete Reservation
-//    @DeleteMapping("api/reservations/delete/{id}")
-//    public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
-//        try {
-//            service.delete(id);
-//            return ResponseEntity.noContent().build();
-//
-//        } catch (ReservationNotFoundException e) {
-//            e.printStackTrace();
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
-//
-//    // 404
-//    @Test
-//    public void testDeleteShouldReturn404NotFound() throws Exception {
-//        Integer reservationId = 3;
-//        String requestURI = END_POINT_PATH + "/" + reservationId;
-//
-//        Mockito.doThrow(ReservationNotFoundException.class).when(service).delete(reservationId);;
-//
-//        mockMvc.perform(delete(requestURI))
-//                .andExpect(status().isNotFound())
-//                .andDo(print());
-//    }
-//
-//    // 200
-//    @Test
-//    public void testDeleteShouldReturn200OK() throws Exception {
-//        Integer reservationId = 3;
-//        String requestURI = END_POINT_PATH + "/" + reservationId;
-//
-//        Mockito.doNothing().when(service).delete(reservationId);
-//
-//        mockMvc.perform(delete(requestURI))
-//                .andExpect(status().isNoContent())
-//                .andDo(print());
-//    }
-//}
+package fr.atypikhouse.api.Controllers;
+
+import fr.atypikhouse.api.Entities.Notification;
+import fr.atypikhouse.api.Entities.Reservation;
+import fr.atypikhouse.api.Repositories.ReservationRepository;
+import fr.atypikhouse.api.Repositories.UserRepository;
+import fr.atypikhouse.api.Utils.RequestUtils;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+
+import java.util.Date;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@SpringBootTest(classes = fr.atypikhouse.api.AtypikHouseApiApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class ReservationControllerTest {
+
+    private static final String END_POINT_PATH = "/api/reservations";
+
+    @LocalServerPort
+    private String port;
+
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private ReservationRepository reservationRepository;
+
+    @Test
+    public void testAddReservation() {
+
+        Reservation reservation = new Reservation();
+        reservation.setId(5);
+        reservation.setPrix(120.00);
+        reservation.setStartDate(new Date());
+        reservation.setEndDate(new Date());
+        reservation.setDate(new Date());
+
+        // Notifier
+        Notification notification = new Notification();
+        notification.setMessage("Un client vient de réserver une de vos locations...");
+        notification.setDate(new Date());
+
+        HttpEntity<Reservation> entity = new HttpEntity<>(reservation, RequestUtils.buildHeadersWithToken());
+
+        ResponseEntity<String> responseEntity = this.restTemplate
+                .postForEntity("http://localhost:" + port + END_POINT_PATH + "/create", entity, String.class);
+
+        assertEquals(201, responseEntity.getStatusCodeValue());
+    }
+
+    @Test
+    public void testUpdateReservation() {
+
+        Reservation oldReservation = reservationRepository.findById(5);
+        Reservation reservation = new Reservation();
+        reservation.setId(6);
+        reservation.setPrix(220.00);
+        reservation.setStartDate(new Date());
+        reservation.setEndDate(new Date());
+        reservation.setDate(new Date());
+
+
+        HttpEntity<Reservation> entity = new HttpEntity<>(reservation, RequestUtils.buildHeadersWithToken());
+
+        ResponseEntity<Reservation> responseEntity = this.restTemplate
+                .exchange("http://localhost:" + port + END_POINT_PATH + "/update/" + oldReservation.getId(), HttpMethod.PUT, entity, new ParameterizedTypeReference<Reservation>() {});
+
+        assertEquals(200, responseEntity.getStatusCodeValue());
+    }
+
+    @Test
+    public void testDeleteReservation() {
+
+        Reservation reservation = reservationRepository.findById(6);
+
+        HttpEntity<Reservation> entity = new HttpEntity<>(RequestUtils.buildHeadersWithToken());
+
+        ResponseEntity<Reservation> responseEntity = this.restTemplate
+                .exchange("http://localhost:" + port + END_POINT_PATH + "/delete/" + reservation.getId(), HttpMethod.DELETE, entity, new ParameterizedTypeReference<Reservation>() {});
+
+        assertEquals(200, responseEntity.getStatusCodeValue());
+    }
+}

@@ -1,4 +1,4 @@
-package fr.atypikhouse.api.Utils;
+package fr.atypikhouse.api.Repositories.Utils;
 
 public enum DisponibiliteReservation {
     DISPONIBLE("DISPONIBLE"),

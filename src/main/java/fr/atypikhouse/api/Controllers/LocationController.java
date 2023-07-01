@@ -1,18 +1,16 @@
 package fr.atypikhouse.api.Controllers;
 
 import fr.atypikhouse.api.Entities.Location;
-import fr.atypikhouse.api.Entities.Notification;
 import fr.atypikhouse.api.Entities.User;
 import fr.atypikhouse.api.Repositories.LocationRepository;
 import fr.atypikhouse.api.Repositories.UserRepository;
-import fr.atypikhouse.api.Utils.DisponibiliteReservation;
+import fr.atypikhouse.api.Repositories.Utils.DisponibiliteReservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @RestController
