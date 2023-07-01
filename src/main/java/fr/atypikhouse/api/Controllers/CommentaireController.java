@@ -13,8 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/" +
-        "")
+@RequestMapping("/api/commentaire")
 public class CommentaireController {
 
     @Autowired
