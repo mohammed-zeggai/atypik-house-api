@@ -62,7 +62,7 @@ public class ReservationControllerTest {
     @Test
     public void testUpdateReservation() {
 
-        Reservation oldReservation = reservationRepository.findById(5);
+        Reservation oldReservation = reservationRepository.findById(5).get();
         Reservation reservation = new Reservation();
         reservation.setId(6);
         reservation.setPrix(220.00);
@@ -82,7 +82,7 @@ public class ReservationControllerTest {
     @Test
     public void testDeleteReservation() {
 
-        Reservation reservation = reservationRepository.findById(6);
+        Reservation reservation = reservationRepository.findById(6).get();
 
         HttpEntity<Reservation> entity = new HttpEntity<>(RequestUtils.buildHeadersWithToken());
 

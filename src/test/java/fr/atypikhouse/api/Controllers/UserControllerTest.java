@@ -68,7 +68,7 @@ public class UserControllerTest {
     @Test
     public void testUpdateUser() {
 
-        User oldUser = userRepository.findById(5);
+        User oldUser = userRepository.findById(5).get();
         User user = new User();
         user.setId(6);
         user.setNom("testNom");
@@ -90,7 +90,7 @@ public class UserControllerTest {
     @Test
     public void testDeleteUser() {
 
-        User user = userRepository.findById(6);
+        User user = userRepository.findById(6).get();
 
         HttpEntity<User> entity = new HttpEntity<>(RequestUtils.buildHeadersWithToken());
 
