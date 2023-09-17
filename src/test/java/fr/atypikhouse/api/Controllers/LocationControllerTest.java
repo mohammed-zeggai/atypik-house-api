@@ -75,7 +75,7 @@ public class LocationControllerTest {
     @Test
     public void testUpdateLocation() {
 
-        Location oldLocation = locationRepository.findById(5);
+        Location oldLocation = locationRepository.findById(5).get();
         Location location = new Location();
         location.setId(6);
         location.setTitre("New Location New Price Test");
@@ -102,7 +102,7 @@ public class LocationControllerTest {
     @Test
     public void testDeleteLocation() {
 
-        Location location = locationRepository.findById(6);
+        Location location = locationRepository.findById(6).get();
 
         HttpEntity<Location> entity = new HttpEntity<>(RequestUtils.buildHeadersWithToken());
 

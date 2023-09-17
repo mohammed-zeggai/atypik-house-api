@@ -8,5 +8,4 @@ import java.util.List;
 
 public interface NotificationRepository extends JpaRepository<Notification, Integer> {
     List<Notification> findByUser(User user);
-    Notification findById(Integer id);
 }

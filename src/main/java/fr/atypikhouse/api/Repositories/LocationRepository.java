@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface LocationRepository extends JpaRepository<Location, Integer> {
-    Location findById(Integer id);
 
     List<Location> findTop6ByOrderByIdDesc();
 

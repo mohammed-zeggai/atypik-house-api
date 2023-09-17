@@ -54,7 +54,7 @@ public class NotificationControllerTest {
     @Test
     public void testDeleteNotification() {
 
-        Notification notification = notificationRepository.findById(5);
+        Notification notification = notificationRepository.findById(5).get();
 
         HttpEntity<Notification> entity = new HttpEntity<>(RequestUtils.buildHeadersWithToken());
 

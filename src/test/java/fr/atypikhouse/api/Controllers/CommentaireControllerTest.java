@@ -6,7 +6,6 @@ import fr.atypikhouse.api.Repositories.UserRepository;
 import fr.atypikhouse.api.Utils.RequestUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -56,7 +55,7 @@ public class CommentaireControllerTest {
     @Test
     public void testUpdateLocation() {
 
-        Commentaire oldCommentaire = commentaireRepository.findById(5);
+        Commentaire oldCommentaire = commentaireRepository.findById(5).get();
         Commentaire commentaire = new Commentaire();
         commentaire.setId(6);
         commentaire.setCommentaire("Parfait");
@@ -74,7 +73,7 @@ public class CommentaireControllerTest {
     @Test
     public void testDeleteCommentaire() {
 
-        Commentaire commentaire = commentaireRepository.findById(6);
+        Commentaire commentaire = commentaireRepository.findById(6).get();
 
         HttpEntity<Commentaire> entity = new HttpEntity<>(RequestUtils.buildHeadersWithToken());
 
