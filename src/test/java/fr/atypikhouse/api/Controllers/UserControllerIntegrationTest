@@ -1,30 +1,80 @@
-@Test
-public void testAddUserIntegration() {
-    // Given
-    User user = new User();
-    user.setNom("TestNom");
-    user.setPrenom("TestPrenom");
-    user.setEmail("testemail@gmail.com");
-    user.setAdresse("TestAdresse");
-    user.setDateNaissance(new Date());
-    user.setTelephone("0707505480");
-    user.setRole("Admin");
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import fr.atypikhouse.api.Entities.User;
+import fr.atypikhouse.api.Repositories.UserRepository;
+import fr.atypikhouse.api.Utils.RequestUtils;
+import java.util.Date;
 
-    // Save user to the database to simulate an existing user
-    userRepository.save(user);
+@SpringBootTest(classes = fr.atypikhouse.api.AtypikHouseApiApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class UserControllerIntegrationTest {
+    private static final String END_POINT_PATH = "/api/users";
 
-    // Encode password
-    String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
-    user.setPassword(encodedPassword);
+    @LocalServerPort
+    private String port;
 
-    // Remove password from returned entity
-    user.setPassword("");
-    HttpEntity<User> entity = new HttpEntity<>(user, RequestUtils.buildHeadersWithToken());
+    @Autowired
+    private TestRestTemplate restTemplate;
 
-    // When
-    ResponseEntity<String> responseEntity = this.restTemplate
-            .postForEntity("http://localhost:" + port + END_POINT_PATH + "/create", entity, String.class);
+    @Autowired
+    private UserRepository userRepository;
 
-    // Then
-    assertEquals(400, responseEntity.getStatusCodeValue()); // Assuming a 400 Bad Request is returned if the user already exists
+    @Test
+    public void testAddUserIntegration() {
+        // Given
+        User user = new User();
+        user.setId(5);
+        user.setNom("TestNom");
+        user.setPrenom("TestPrenom");
+        user.setEmail("testemail@gmail.com");
+        user.setAdresse("TestAdresse");
+        user.setDateNaissance(new Date());
+        user.setTelephone("0707505480");
+        user.setRole("Admin");
+
+        // When
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://localhost:" + port + END_POINT_PATH + "/create", user, String.class);
+
+        // Then
+        assertEquals(201, responseEntity.getStatusCodeValue());
+    }
+
+    @Test
+    public void testUpdateUserIntegration() {
+        // Given
+        User user = new User();
+        user.setId(6);
+        user.setNom("testNom");
+        user.setPrenom("testPrenom");
+        user.setEmail("test@gmail.com");
+        user.setAdresse("testAdresse");
+        user.setDateNaissance(new Date());
+        user.setTelephone("0750025555");
+        user.setRole("Admin");
+
+        // When
+        ResponseEntity<User> responseEntity = restTemplate.exchange("http://localhost:" + port + END_POINT_PATH + "/update/6", HttpMethod.PUT, new HttpEntity<>(user), new ParameterizedTypeReference<User>() {});
+
+        // Then
+        assertEquals(200, responseEntity.getStatusCodeValue());
+    }
+
+    @Test
+    public void testDeleteUserIntegration() {
+        // Given
+        User user = userRepository.findById(6).orElse(null);
+
+        // When
+        ResponseEntity<User> responseEntity = restTemplate.exchange("http://localhost:" + port + END_POINT_PATH + "/delete/6", HttpMethod.DELETE, new HttpEntity<>(RequestUtils.buildHeadersWithToken()), new ParameterizedTypeReference<User>() {});
+
+        // Then
+        assertEquals(200, responseEntity.getStatusCodeValue());
+    }
 }
