@@ -1,0 +1,30 @@
+@Test
+public void testAddUserIntegration() {
+    // Given
+    User user = new User();
+    user.setNom("TestNom");
+    user.setPrenom("TestPrenom");
+    user.setEmail("testemail@gmail.com");
+    user.setAdresse("TestAdresse");
+    user.setDateNaissance(new Date());
+    user.setTelephone("0707505480");
+    user.setRole("Admin");
+
+    // Save user to the database to simulate an existing user
+    userRepository.save(user);
+
+    // Encode password
+    String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+    user.setPassword(encodedPassword);
+
+    // Remove password from returned entity
+    user.setPassword("");
+    HttpEntity<User> entity = new HttpEntity<>(user, RequestUtils.buildHeadersWithToken());
+
+    // When
+    ResponseEntity<String> responseEntity = this.restTemplate
+            .postForEntity("http://localhost:" + port + END_POINT_PATH + "/create", entity, String.class);
+
+    // Then
+    assertEquals(400, responseEntity.getStatusCodeValue()); // Assuming a 400 Bad Request is returned if the user already exists
+}
