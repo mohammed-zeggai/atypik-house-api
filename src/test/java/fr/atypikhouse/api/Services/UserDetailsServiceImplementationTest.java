@@ -9,6 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.boot.test.context.SpringBootTest;
+
 
 import java.util.Collections;
 import java.util.List;
@@ -43,7 +45,7 @@ public class UserDetailsServiceImplementationTest {
     @Test
     public void should_return_exception_when_user_is_not_found() {
         // given
-        when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
+        when(userRepository.findByEmail(anyString())).thenReturn(null);
 
         // then
         assertThrows(UsernameNotFoundException.class, () -> {
@@ -79,7 +81,7 @@ public class UserDetailsServiceImplementationTest {
         when(userRepository.findById(1)).thenReturn(Optional.of(user));
 
         // when
-        User savedUser = userDetailsServiceImplementation.getUserById(user.getId()).get();
+        User savedUser = (User) userDetailsServiceImplementation.getUserById(user.getId());
 
         // then
         assertThat(savedUser).isNotNull();
