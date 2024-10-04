@@ -1,6 +1,7 @@
 package fr.atypikhouse.api.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.List;
 
 
 @Entity
+@Builder
 public class User {
 
     @Id
@@ -42,9 +44,29 @@ public class User {
     public User(String mohammed, String mohammed1, List emptyList) {
     }
 
-    public Integer getId() {
-        return id;
+    public User(Integer id, List<Location> locations, List<Commentaire> commentaires,
+                List<Reservation> reservations, List<Notification> notifications,
+                String nom, String prenom, String email, String password,
+                String image, Date dateNaissance, String telephone,
+                String adresse, String role) {
+        this.id = id;
+        this.locations = locations;
+        this.commentaires = commentaires;
+        this.reservations = reservations;
+        this.notifications = notifications;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.password = password;
+        this.image = image;
+        this.dateNaissance = dateNaissance;
+        this.telephone = telephone;
+        this.adresse = adresse;
+        this.role = role;
     }
+
+
+    public Integer getId() { return id; }
 
     public void setId(Integer id) {
         this.id = id;
