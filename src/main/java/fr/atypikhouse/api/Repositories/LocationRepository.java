@@ -11,6 +11,6 @@ public interface LocationRepository extends JpaRepository<Location, Integer> {
 
     List<Location> findTop6ByOrderByIdDesc();
 
-    @Query(value = "SELECT * FROM Location l WHERE DATE(planning_start_date) >= ?1 AND DATE(planning_end_date) <= ?2", nativeQuery = true)
+    @Query(value = "SELECT * FROM location l WHERE DATE(planning_start_date) >= ?1 AND DATE(planning_end_date) <= ?2", nativeQuery = true)
     List<Location> findAllByStartAndEndDate(LocalDate planningStartDate, LocalDate planningEndDate);
 }
