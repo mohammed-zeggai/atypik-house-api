@@ -21,7 +21,11 @@ public class Location {
 
     private String titre;
     private String type;
+
+    @Lob
+    @Column(length = 1500)
     private String description;
+
     private String equipements;
     private String surface;
     private String image;
