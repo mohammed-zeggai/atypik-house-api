@@ -34,7 +34,11 @@ public class Location {
 
     private Date planningEndDate;
     private Double prix;
+
+    @Lob
+    @Column(length = 100)
     private String adresse;
+
     private String disponibilite;
 
     public Location() {
