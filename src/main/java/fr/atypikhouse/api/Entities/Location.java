@@ -23,7 +23,7 @@ public class Location {
     private String type;
 
     @Lob
-    @Column(length = 1500)
+    @Column(length = 5000)
     private String description;
 
     private String equipements;
