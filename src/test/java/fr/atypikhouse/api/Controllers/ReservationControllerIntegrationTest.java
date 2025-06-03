@@ -1,3 +1,5 @@
+package fr.atypikhouse.api.Controllers;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import fr.atypikhouse.api.Entities.Reservation;
 import fr.atypikhouse.api.Utils.RequestUtils;
 import java.util.Date;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(classes = fr.atypikhouse.api.AtypikHouseApiApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ReservationControllerIntegrationTest {

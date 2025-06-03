@@ -1,3 +1,5 @@
+package fr.atypikhouse.api.Controllers;
+
 import fr.atypikhouse.api.Entities.Commentaire;
 import fr.atypikhouse.api.Repositories.CommentaireRepository;
 import fr.atypikhouse.api.Utils.RequestUtils;

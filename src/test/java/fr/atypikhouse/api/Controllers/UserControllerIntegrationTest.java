@@ -1,3 +1,5 @@
+package fr.atypikhouse.api.Controllers;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
