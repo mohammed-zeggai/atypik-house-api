@@ -1,8 +1,14 @@
-import javax.servlet.http.HttpServletRequest;Add commentMore actions
+package fr.atypikhouse.api.Security;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import java.io.IOException;
 
 
 public class CORSFilter extends OncePerRequestFilter {
