@@ -73,7 +73,7 @@ public class LocationControllerTest {
     @Test
     @Order(2)
     public void testUpdateLocation() {
-        Optional<Location> oldLocation = locationRepository.findById(127);
+        Optional<Location> oldLocation = locationRepository.findById(141);
         Location oldLocationEntity = oldLocation.orElseThrow(() -> new RuntimeException("Location introuvable"));
 
         Location location = new Location();
@@ -101,7 +101,7 @@ public class LocationControllerTest {
     @Test
     @Order(3)
     public void testDeleteLocation() {
-        Optional<Location> oldLocation = locationRepository.findById(127);
+        Optional<Location> oldLocation = locationRepository.findById(141);
         Location oldLocationEntity = oldLocation.orElseThrow(() -> new RuntimeException("Location introuvable"));
 
         HttpEntity<Location> entity = new HttpEntity<>(RequestUtils.buildHeadersWithToken());

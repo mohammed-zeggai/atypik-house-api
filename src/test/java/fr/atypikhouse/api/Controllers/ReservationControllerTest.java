@@ -107,7 +107,7 @@ public class ReservationControllerTest {
     @Transactional
     public void testUpdateReservation() {
         // Récupérer la réservation par son ID (ici 63L)
-        Reservation oldReservation = reservationRepository.findById(66)
+        Reservation oldReservation = reservationRepository.findById(73)
                 .orElseThrow(() -> new RuntimeException("Réservation introuvable"));
 
         // (Optionnel) Forcer le chargement des collections lazy si besoin
@@ -136,7 +136,7 @@ public class ReservationControllerTest {
     @Order(3)
     public void testDeleteReservation() {
 
-        Optional<Reservation> oldReservation = reservationRepository.findById(66);
+        Optional<Reservation> oldReservation = reservationRepository.findById(73);
         Reservation oldReservationEntity = oldReservation.orElseThrow(() -> new RuntimeException("Réservation introuvable"));
 
         HttpEntity<Reservation> entity = new HttpEntity<>(RequestUtils.buildHeadersWithToken());
