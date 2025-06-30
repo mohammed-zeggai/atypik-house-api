@@ -46,11 +46,11 @@ public class ReservationController {
         return new ResponseEntity<List<Reservation>>(user.getReservations(), HttpStatus.OK);
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Reservation> getOne(@PathVariable("id") Integer id) {
-//        Reservation reservation = reservationRepository.findById(id).get();
-//        return new ResponseEntity<Reservation>(reservation, HttpStatus.OK);
-//    }
+    //    @GetMapping("/{id}")
+    //    public ResponseEntity<Reservation> getOne(@PathVariable("id") Integer id) {
+    //        Reservation reservation = reservationRepository.findById(id).get();
+    //        return new ResponseEntity<Reservation>(reservation, HttpStatus.OK);
+    //    }
 
     // CREATE
     @PostMapping("/create")

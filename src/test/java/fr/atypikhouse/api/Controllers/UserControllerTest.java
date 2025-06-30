@@ -1,29 +1,32 @@
 package fr.atypikhouse.api.Controllers;
 
-import fr.atypikhouse.api.Entities.Commentaire;
 import fr.atypikhouse.api.Entities.User;
-import fr.atypikhouse.api.Exceptions.UserAlreadyExistsException;
 import fr.atypikhouse.api.Repositories.UserRepository;
 import fr.atypikhouse.api.Utils.RequestUtils;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 @SpringBootTest(classes = fr.atypikhouse.api.AtypikHouseApiApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserControllerTest {
-    private static final String END_POINT_PATH = "/api/users";
+    private static final String END_POINT_PATH = "/api/user";
 
     @LocalServerPort
     private String port;
@@ -37,32 +40,27 @@ public class UserControllerTest {
     @Autowired
     private UserRepository userRepository;
 
+    private Date toDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
     @Test
+    @Order(1)
     public void testAddUser() {
         User user = new User();
-        user.setId(5);
         user.setNom("TestNom");
         user.setPrenom("TestPrenom");
         user.setEmail("testemail@gmail.com");
+        user.setPassword("Passwound@2025");
         user.setAdresse("TestAdresse");
-        user.setDateNaissance(new Date());
+        user.setDateNaissance(toDate(LocalDate.of(1999, 7, 15)));
         user.setTelephone("0707505480");
-        user.setRole("Admin");
-
-        User existingUser = userRepository.findByEmail(user.getEmail());
-
-        if (existingUser != null) {
-            throw new UserAlreadyExistsException("Cet adresse mail est déjà utilisée!");
-        }
+        user.setRole("ROLE_ADMIN");
 
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-        userRepository.save(user);
 
-        // Remove password from returned entity
-        user.setPassword("");
         HttpEntity<User> entity = new HttpEntity<>(user, RequestUtils.buildHeadersWithToken());
-
         ResponseEntity<String> responseEntity = this.restTemplate
                 .postForEntity("http://localhost:" + port + END_POINT_PATH + "/create", entity, String.class);
 
@@ -70,18 +68,19 @@ public class UserControllerTest {
     }
 
     @Test
+    @Order(2)
     public void testUpdateUser() {
 
-        User oldUser = userRepository.findById(5).get();
+        User oldUser = userRepository.findByEmail("testemail@gmail.com");
         User user = new User();
-        user.setId(6);
         user.setNom("testNom");
         user.setPrenom("testPrenom");
-        user.setEmail("test@gmail.com");
+        user.setEmail("testemail@gmail.com");
         user.setAdresse("testAdresse");
-        user.setDateNaissance(new Date());
+        user.setPassword("Passwound@2025");
+        user.setDateNaissance(toDate(LocalDate.of(2000, 7, 15)));
         user.setTelephone("0750025555");
-        user.setRole("Admin");
+        user.setRole("ROLE_ADMIN");
 
         HttpEntity<User> entity = new HttpEntity<>(user, RequestUtils.buildHeadersWithToken());
 
@@ -92,9 +91,10 @@ public class UserControllerTest {
     }
 
     @Test
+    @Order(3)
     public void testDeleteUser() {
 
-        User user = userRepository.findById(6).get();
+        User user = userRepository.findByEmail("testemail@gmail.com");
 
         HttpEntity<User> entity = new HttpEntity<>(RequestUtils.buildHeadersWithToken());
 

@@ -1,5 +1,6 @@
 package fr.atypikhouse.api.Entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 
@@ -33,6 +34,7 @@ public class User {
     private String email;
     private String password;
     private String image;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date dateNaissance;
     private String telephone;
     private String adresse;
