@@ -1,4 +1,4 @@
-package fr.atypikhouse.api.Controllers;
+package fr.atypikhouse.api.IntegrationTests;
 
 import fr.atypikhouse.api.Entities.User;
 import fr.atypikhouse.api.Repositories.UserRepository;

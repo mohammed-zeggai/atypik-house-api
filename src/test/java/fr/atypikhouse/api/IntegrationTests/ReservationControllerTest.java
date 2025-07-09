@@ -1,4 +1,4 @@
-package fr.atypikhouse.api.Controllers;
+package fr.atypikhouse.api.IntegrationTests;
 
 import fr.atypikhouse.api.Entities.Location;
 import fr.atypikhouse.api.Entities.Reservation;

@@ -26,12 +26,12 @@ public class UserDetailsServiceImplementationTest {
 
     @BeforeEach
     public void setup() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
         user = User.builder()
-                .id(1)
                 .nom("Zeggai")
                 .prenom("Mohammed")
                 .email("mohammedzeggai9@gmail.com")
+                .password("Password@2025")
                 .build();
     }
 
